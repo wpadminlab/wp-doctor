@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit wp-doctor — https://wpadminlab.com/</title>
+<style>
+  :root { --ink:#19170f; --paper:#f6f1e8; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif; background:var(--paper); color:var(--ink); margin:0; padding:0 1rem 4rem; line-height:1.55; }
+  .wrap { max-width:820px; margin:0 auto; }
+  header { padding:2.5rem 0 1rem; border-bottom:2px solid var(--ink); }
+  h1 { font-size:1.5rem; margin:0 0 .3rem; }
+  .meta { color:#6b6555; font-size:.9rem; }
+  .scorecard { display:flex; align-items:center; gap:1.5rem; margin:1.5rem 0; padding:1.2rem 1.5rem; background:#fff; border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .grade { font-size:3rem; font-weight:800; color:#d9682f; line-height:1; }
+  .score { font-size:1.1rem; }
+  .counts span { display:inline-block; margin-right:.8rem; font-size:.85rem; }
+  h2 { margin:2rem 0 .8rem; font-size:1.2rem; }
+  .count { font-size:.8rem; color:#fff; background:var(--ink); border-radius:20px; padding:.1rem .6rem; vertical-align:middle; }
+  .finding { display:flex; gap:.9rem; background:#fff; border-radius:8px; padding:1rem 1.1rem; margin-bottom:.7rem; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  .badge { color:#fff; font-size:.68rem; font-weight:700; padding:.2rem .5rem; border-radius:4px; height:fit-content; white-space:nowrap; letter-spacing:.03em; }
+  .fbody h3 { margin:.1rem 0 .3rem; font-size:1rem; }
+  .fbody p { margin:.2rem 0; font-size:.92rem; }
+  .reco { color:#8a5a2b; }
+  code { display:inline-block; margin-top:.4rem; background:#f0ebe0; padding:.15rem .45rem; border-radius:4px; font-size:.82rem; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid #ccc; color:#6b6555; font-size:.85rem; text-align:center; }
+  footer a { color:#b8442b; }
+</style>
+</head>
+<body><div class="wrap">
+  <header>
+    <h1>Audit wp-doctor</h1>
+    <div class="meta">https://wpadminlab.com/ · 2026-07-09 07:09 UTC<br>WordPress (version masquée) · thème wpadminlab</div>
+  </header>
+  <div class="scorecard">
+    <div class="grade">D</div>
+    <div>
+      <div class="score"><strong>52/100</strong></div>
+      <div class="counts">
+        <span style="color:#b8442b">Critiques : 0</span>
+        <span style="color:#d9682f">Élevés : 0</span>
+        <span style="color:#c99a00">Moyens : 4</span>
+        <span style="color:#3a7ca5">Faibles : 2</span>
+      </div>
+    </div>
+  </div>
+  <h2>🔒 Sécurité <span class="count">7</span></h2>
+    <div class="finding sev-medium">
+      <span class="badge" style="background:#c99a00">MOYEN</span>
+      <div class="fbody">
+        <h3>En-tête de sécurité manquant : content-security-policy</h3>
+        <p>CSP limite les scripts exécutables (anti-XSS)</p>
+        <p class="reco">→ Définir une Content-Security-Policy adaptée à votre thème</p>
+        
+      </div>
+    </div>
+    <div class="finding sev-medium">
+      <span class="badge" style="background:#c99a00">MOYEN</span>
+      <div class="fbody">
+        <h3>En-tête de sécurité manquant : strict-transport-security</h3>
+        <p>HSTS force le HTTPS et protège du downgrade</p>
+        <p class="reco">→ Ajouter : Strict-Transport-Security: max-age=31536000; includeSubDomains</p>
+        
+      </div>
+    </div>
+    <div class="finding sev-medium">
+      <span class="badge" style="background:#c99a00">MOYEN</span>
+      <div class="fbody">
+        <h3>Énumération des utilisateurs via l&#x27;API REST</h3>
+        <p>wp-json/wp/v2/users expose 1 identifiant(s) : wpadmin</p>
+        <p class="reco">→ Restreindre l&#x27;endpoint users de l&#x27;API REST (filtre rest_endpoints ou plugin de sécurité).</p>
+        <code>GET wp-json/wp/v2/users → 1 slugs</code>
+      </div>
+    </div>
+    <div class="finding sev-low">
+      <span class="badge" style="background:#3a7ca5">FAIBLE</span>
+      <div class="fbody">
+        <h3>Énumération d&#x27;auteur via ?author=1</h3>
+        <p>La redirection ?author=1 révèle un identifiant de connexion : « wpadmin ».</p>
+        <p class="reco">→ Bloquer les requêtes ?author= ou dissocier le login du slug public (nicename).</p>
+        <code>?author=1 → 301 https://wpadminlab.com/author/wpadmin/</code>
+      </div>
+    </div>
+    <div class="finding sev-low">
+      <span class="badge" style="background:#3a7ca5">FAIBLE</span>
+      <div class="fbody">
+        <h3>Ressource sensible accessible : readme.html</h3>
+        <p>readme.html expose la version exacte de WordPress</p>
+        <p class="reco">→ Bloquer l&#x27;accès public à readme.html (règle serveur) ou le supprimer.</p>
+        <code>GET readme.html → HTTP 200</code>
+      </div>
+    </div>
+    <div class="finding sev-info">
+      <span class="badge" style="background:#888">INFO</span>
+      <div class="fbody">
+        <h3>Ressource sensible accessible : license.txt</h3>
+        <p>license.txt présent (empreinte WordPress)</p>
+        <p class="reco">→ Bloquer l&#x27;accès public à license.txt (règle serveur) ou le supprimer.</p>
+        <code>GET license.txt → HTTP 200</code>
+      </div>
+    </div>
+    <div class="finding sev-info">
+      <span class="badge" style="background:#888">INFO</span>
+      <div class="fbody">
+        <h3>En-tête de sécurité manquant : permissions-policy</h3>
+        <p>Restreint l&#x27;accès aux API du navigateur</p>
+        <p class="reco">→ Envisager une Permissions-Policy</p>
+        
+      </div>
+    </div><h2>⚡ Performance <span class="count">1</span></h2>
+    <div class="finding sev-medium">
+      <span class="badge" style="background:#c99a00">MOYEN</span>
+      <div class="fbody">
+        <h3>Aucun cache de page détecté</h3>
+        <p>Aucun en-tête de cache (LiteSpeed, Cloudflare, Varnish…) n&#x27;a été observé.</p>
+        <p class="reco">→ Installer un cache de page. Sur o2switch : plugin LiteSpeed Cache.</p>
+        <code>Aucun en-tête de cache dans la réponse</code>
+      </div>
+    </div>
+  <footer>Rapport généré par <a href="https://wpadminlab.com">wp-doctor</a> — WP Admin Lab.<br>
+  Audit passif et non intrusif. Utilisez-le uniquement sur des sites que vous êtes autorisé à auditer.</footer>
+</div></body>
+</html>

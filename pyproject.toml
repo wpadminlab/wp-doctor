@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wp-doctor"
+version = "1.0.0"
+description = "Audit à distance d'un site WordPress : sécurité, performance et SEO. Sans installation, non intrusif."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "WP Admin Lab", email = "contact@wpadminlab.com" }]
+keywords = ["wordpress", "security", "audit", "seo", "performance", "scanner", "cli"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://wpadminlab.com"
+Repository = "https://github.com/wpadminlab/wp-doctor"
+Documentation = "https://wpadminlab.com/wp-doctor/"
+
+[project.scripts]
+wp-doctor = "wpdoctor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["wpdoctor*"]

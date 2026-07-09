@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.venv/
+venv/
+*.html
+!docs/exemple-rapport.html
+preview.png
+.DS_Store
