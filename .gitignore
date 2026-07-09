@@ -7,6 +7,6 @@ dist/
 .venv/
 venv/
 *.html
-!docs/exemple-rapport.html
+!docs/*.html
 preview.png
 .DS_Store

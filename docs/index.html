@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp-doctor — Audit WordPress à distance (sécurité, performance, SEO)</title>
+<meta name="description" content="wp-doctor : outil open-source d'audit à distance d'un site WordPress. Sécurité, performance et SEO technique en une commande, sans installation. Créé par WP Admin Lab.">
+<link rel="canonical" href="https://wpadminlab.github.io/wp-doctor/">
+<meta property="og:title" content="wp-doctor — Audit WordPress à distance">
+<meta property="og:description" content="Audit sécurité, performance et SEO d'un site WordPress en une commande. Open-source, sans dépendance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wpadminlab.github.io/wp-doctor/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "wp-doctor",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "description": "Outil open-source d'audit à distance d'un site WordPress : sécurité, performance et SEO technique.",
+  "url": "https://wpadminlab.github.io/wp-doctor/",
+  "author": { "@type": "Organization", "name": "WP Admin Lab", "url": "https://wpadminlab.com" },
+  "license": "https://opensource.org/licenses/MIT"
+}
+</script>
+<style>
+  :root { --ink:#19170f; --paper:#f6f1e8; --clay:#b8442b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif; background:var(--paper); color:var(--ink); line-height:1.6; }
+  .wrap { max-width:860px; margin:0 auto; padding:0 1.2rem; }
+  header { padding:4rem 0 2.5rem; text-align:center; }
+  .logo { font-size:3rem; }
+  h1 { font-size:2.3rem; margin:.5rem 0; letter-spacing:-.02em; }
+  .tagline { font-size:1.2rem; color:#5c5647; max-width:600px; margin:0 auto 1.5rem; }
+  .cta { display:inline-flex; gap:.8rem; flex-wrap:wrap; justify-content:center; }
+  .btn { display:inline-block; padding:.7rem 1.4rem; border-radius:8px; text-decoration:none; font-weight:600; transition:transform .1s; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn-primary { background:var(--clay); color:#fff; }
+  .btn-ghost { background:#fff; color:var(--ink); border:1px solid #d8d0c0; }
+  pre { background:var(--ink); color:#f0ebe0; padding:1.2rem 1.4rem; border-radius:10px; overflow-x:auto; font-family:'JetBrains Mono',Consolas,monospace; font-size:.9rem; margin:1rem 0; }
+  pre .c { color:#8a9; }
+  section { padding:2.5rem 0; border-top:1px solid #e0d8c8; }
+  h2 { font-size:1.5rem; margin-bottom:1.2rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.2rem; }
+  .card { background:#fff; border-radius:10px; padding:1.4rem; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+  .card h3 { font-size:1.1rem; margin-bottom:.5rem; }
+  .card p { font-size:.92rem; color:#5c5647; }
+  .card .ico { font-size:1.6rem; }
+  ul.checks { list-style:none; font-size:.92rem; }
+  ul.checks li { padding:.25rem 0 .25rem 1.5rem; position:relative; }
+  ul.checks li::before { content:"✓"; position:absolute; left:0; color:var(--clay); font-weight:700; }
+  .note { background:#fff5ec; border-left:4px solid var(--clay); padding:1rem 1.2rem; border-radius:0 8px 8px 0; font-size:.9rem; margin:1rem 0; }
+  footer { text-align:center; padding:3rem 0; border-top:2px solid var(--ink); font-size:.9rem; color:#5c5647; }
+  footer a { color:var(--clay); font-weight:600; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">🩺</div>
+    <h1>wp-doctor</h1>
+    <p class="tagline">Auditez la <strong>sécurité</strong>, la <strong>performance</strong> et le <strong>SEO</strong> de n'importe quel site WordPress — en une seule commande, à distance, sans rien installer.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/wpadminlab/wp-doctor">⭐ Voir sur GitHub</a>
+      <a class="btn btn-ghost" href="exemple-rapport.html">Voir un rapport d'exemple</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2>Démarrage en 10 secondes</h2>
+  <pre><span class="c"># Sans installation, avec Python 3.8+</span>
+python3 -m wpdoctor exemple.com
+
+<span class="c"># Ou installez la commande</span>
+pip install wp-doctor
+wp-doctor exemple.com --format html -o rapport.html</pre>
+  <p>Zéro dépendance : uniquement la bibliothèque standard de Python.</p>
+</section>
+
+<section>
+  <h2>Trois audits en un</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="ico">🔒</div>
+      <h3>Sécurité</h3>
+      <p>Fichiers sensibles exposés, xmlrpc ouvert, énumération d'utilisateurs, en-têtes de sécurité manquants, version exposée.</p>
+    </div>
+    <div class="card">
+      <div class="ico">⚡</div>
+      <h3>Performance</h3>
+      <p>Temps de réponse serveur, cache de page, compression, poids du HTML, lazy-loading des images.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🔍</div>
+      <h3>SEO technique</h3>
+      <p>Title, meta description, canonical, Open Graph, données structurées, robots.txt, sitemap, noindex accidentel.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Ce que wp-doctor contrôle</h2>
+  <div class="grid">
+    <ul class="checks">
+      <li>Fichiers <code>.env</code>, <code>wp-config.php.bak</code>, <code>.git/config</code></li>
+      <li>xmlrpc.php et surface de brute-force</li>
+      <li>Énumération via API REST et <code>?author=1</code></li>
+      <li>HSTS, CSP, X-Frame-Options, nosniff</li>
+      <li>Version WordPress et empreinte des plugins</li>
+    </ul>
+    <ul class="checks">
+      <li>TTFB et cache de page (LiteSpeed, CDN…)</li>
+      <li>Compression gzip / brotli</li>
+      <li>Données structurées JSON-LD</li>
+      <li>Sitemap et robots.txt cohérents</li>
+      <li>Score /100 et note A→F exportable</li>
+    </ul>
+  </div>
+  <div class="note">
+    <strong>Usage responsable.</strong> wp-doctor est passif et non intrusif (aucune exploitation, aucun brute-force).
+    N'auditez que des sites qui vous appartiennent ou pour lesquels vous avez une autorisation explicite.
+  </div>
+</section>
+
+<section>
+  <h2>Rapport clair, exportable</h2>
+  <p>Sortie terminal colorée, ou export <strong>HTML</strong>, <strong>Markdown</strong> et <strong>JSON</strong>
+  pour l'intégrer à vos dashboards ou votre CI (<code>--fail-on critical</code>).</p>
+  <p style="margin-top:1rem"><a class="btn btn-ghost" href="exemple-rapport.html">👉 Ouvrir un rapport d'exemple</a></p>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>wp-doctor est un projet open-source (MIT) créé et maintenu par
+    <a href="https://wpadminlab.com">WP Admin Lab</a>,
+    le blog francophone dédié à WordPress, au développement web et à l'IA.</p>
+    <p style="margin-top:.8rem">Guides et tutoriels détaillés sur
+    <a href="https://wpadminlab.com">wpadminlab.com</a> ·
+    <a href="https://github.com/wpadminlab/wp-doctor">Code source</a></p>
+  </div>
+</footer>
+</body>
+</html>
